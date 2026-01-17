@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        /* Specific overrides/additions for Works page */
+        .works-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(208, 0, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            padding: 0 5%;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--neon-red);
+            color: #fff;
+            border-color: var(--neon-red);
+            box-shadow: 0 0 20px rgba(255, 42, 42, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .works-grid {
+            columns: 3 300px;
+            column-gap: 1.5rem;
+            padding: 0 5% 5rem;
+        }
+
+        .work-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.02);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            cursor: pointer;
+        }
+
+        .work-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .work-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .work-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            opacity: 0;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+        }
+
+        .work-item:hover .work-item-overlay {
+            opacity: 1;
+        }
+
+        .work-title {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transform: translateY(20px);
+            transition: 0.3s;
+        }
+
+        .work-category {
+            color: var(--neon-red);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateY(20px);
+            transition: 0.3s 0.1s;
+        }
+
+        .work-item:hover .work-title,
+        .work-item:hover .work-category {
+            transform: translateY(0);
+        }
+
+        /* Filter Animation */
+        .work-item.hide {
+            display: none;
+        }
+
+        /* Modal tweaks */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border: 2px solid var(--glass-border);
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(255, 42, 42, 0.1);
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-lightbox:hover {
+            color: var(--neon-red);
+        }
+
+        @media screen and (max-width: 768px) {
+            .works-hero {
+                height: 50vh;
+            }
+
+            .works-hero h1 {
+                font-size: 3rem !important;
+            }
+
+            .filter-container {
+                gap: 0.5rem;
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .filter-btn {
+                flex-shrink: 0;
+                padding: 0.6rem 1.2rem;
+            }
+
+            .works-grid {
+                columns: 1;
+                padding: 0 5% 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Atmospherics -->
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <!-- Dynamic Nav Container -->
+    <div id="dynamic-nav"></div>
+
+    <!-- Header -->
+    <header class="works-hero">
+        <div>
+            <h1 style="font-size: 4rem;">SELECTED <span class="highlight">WORKS</span></h1>
+            <p>A collection of moments, captured.</p>
+        </div>
+    </header>
+
+    <!-- Filters -->
+    <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="concerts">Concerts</button>
+        <button class="filter-btn" data-filter="street">Street</button>
+        <button class="filter-btn" data-filter="wildlife">Wild Life</button>
+        <button class="filter-btn" data-filter="landscape">Landscape</button>
+        <button class="filter-btn" data-filter="exhibition">Exhibition</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="works-grid" id="works-grid">
+        <!-- Rendered by JS -->
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="Full View">
+    </div>
+
+    <!-- Footer -->
+    <!-- Dynamic Footer Container -->
+    <div id="dynamic-footer"></div>
+
+    <!-- Load Data -->
+    <script src="../assets/js/gallery-data.js"></script>
+
+    <script>
+        // Render Gallery
+        const galleryContainer = document.getElementById('works-grid');
+
+        // Debug check
+        if (typeof galleryData === 'undefined') {
+            console.error('Gallery data not loaded. Please run update-gallery.bat');
+            galleryContainer.innerHTML = '<p style="color:white;text-align:center;">Gallery data missing. Please run update-gallery.bat</p>';
+        } else {
+            galleryData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'work-item';
+                div.setAttribute('data-category', item.category);
+
+                // Handle "wild life" space in data-category for filtering
+                if (item.category === 'wild life') div.setAttribute('data-category', 'wildlife');
+
+                div.innerHTML = `
+                    <img src="${item.src}" alt="${item.title}" loading="lazy">
+                    <div class="work-item-overlay">
+                        <span class="work-category">${item.originalCategory}</span>
+                        <h3 class="work-title">${item.title}</h3>
+                    </div>
+                `;
+                galleryContainer.appendChild(div);
+            });
+        }
+
+        // Filter Logic (Delegation isn't needed for buttons, but items are dynamic)
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        // We select items AFTER rendering
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active to clicked
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+                const updateItems = document.querySelectorAll('.work-item'); // Re-select
+
+                updateItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    if (filterValue === 'all' || category === filterValue) {
+                        item.classList.remove('hide');
+                        item.style.animation = 'fadeIn 0.5s ease forwards';
+                    } else {
+                        item.classList.add('hide');
+                    }
+                });
+            });
+        });
+
+        // Check URL Params for Filter
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterParam = urlParams.get('filter');
+        if (filterParam) {
+            // Slight delay to ensure elements are rendered
+            setTimeout(() => {
+                const targetBtn = document.querySelector(`.filter-btn[data-filter="${filterParam}"]`);
+                if (targetBtn) {
+                    targetBtn.click();
+                }
+            }, 100);
+        }
+
+        // Lightbox Logic (Event Delegation for dynamic items)
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeLightbox = document.querySelector('.close-lightbox');
+
+        galleryContainer.addEventListener('click', (e) => {
+            const workItem = e.target.closest('.work-item');
+            if (workItem) {
+                const img = workItem.querySelector('img');
+                if (img) {
+                    lightboxImg.src = img.src;
+                    lightbox.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+        });
+
+        closeLightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+    </script>
+    <script src="../assets/js/main.js"></script>
+</body>
+
+</html>

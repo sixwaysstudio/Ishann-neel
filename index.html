@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+
+    <!-- Background Atmospherics -->
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <!-- Dynamic Nav Container -->
+    <div id="dynamic-nav"></div>
+
+    <!-- 1) Intro and Photo (Hero Section) -->
+    <!-- Structure: bg | intro text | sub -->
+    <header class="hero" id="home">
+        <!-- Kept the layered layout but integrating with new styles -->
+        <div class="hero-layout">
+            <!-- Intro Text (Middle - Behind) -->
+            <div class="hero-content">
+                <h1 class="hero-title">ISHAAN NEEL<span class="highlight">PHOTOGRAPHY</span></h1>
+            </div>
+
+            <!-- Subject Image (Bottom - Front) -->
+            <div class="hero-subject">
+                <img src="assets/images/home/sub.png" alt="Photographer">
+            </div>
+
+            <!-- Buttons (Top - Front) -->
+            <div class="hero-buttons">
+                <a href="#portfolio" class="cta-btn">View Work</a>
+                <a href="#contact" class="secondary-btn">Contact Me</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2) My Story -->
+    <section id="story">
+        <div class="glass-card">
+            <h2>My Story</h2>
+            <div class="story-container">
+                <div class="story-image">
+                    <img src="assets/images/story.jpg" alt="My Story">
+                </div>
+                <div class="story-text">
+                    <p>
+                        I always wondered if I could show other people how I viewed the world. That made me start my
+                        journey with my mom's Nokia 6300 and since then I've been a vagabond walking through the world
+                        creating my own shutterstory.
+                    </p>
+                    <p>
+                        It's still a small feat but I'm learning everyday to reach new heights.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3) Services -->
+    <section id="services">
+        <h2>Services</h2>
+        <div class="features-grid">
+            <div class="glass-card service-card">
+                <h3>Portrait Photography</h3>
+                <p>Professional portraits that capture your personality and style.</p>
+            </div>
+            <div class="glass-card service-card">
+                <h3>Event Coverage</h3>
+                <p>Documenting your special occasions with artistic flair.</p>
+            </div>
+            <div class="glass-card service-card">
+                <h3>Commercial</h3>
+                <p>High-quality images for your brand and products.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4) Portfolio -->
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <div class="portfolio-grid">
+            <!-- Category Card 1: STREET -->
+            <div class="glass-card category-card" onclick="location.href='others/works.html?filter=street'"
+                style="cursor:pointer;">
+                <div class="category-overlay">
+                    <h3>STREET</h3>
+                    <div class="view-gallery-btn">View Gallery</div>
+                </div>
+                <img src="assets/images/works/STREET/DSC00407.jpg" alt="Street Photography" class="category-bg">
+            </div>
+
+            <!-- Category Card 2: WILD LIFE -->
+            <div class="glass-card category-card" onclick="location.href='others/works.html?filter=wildlife'"
+                style="cursor:pointer;">
+                <div class="category-overlay">
+                    <h3>WILD LIFE</h3>
+                    <div class="view-gallery-btn">View Gallery</div>
+                </div>
+                <img src="assets/images/works/WILD LIFE/_DSC0190_1.jpg" alt="Wild Life Photography" class="category-bg">
+            </div>
+
+            <!-- Category Card 3: LANDSCAPE -->
+            <div class="glass-card category-card" onclick="location.href='others/works.html?filter=landscape'"
+                style="cursor:pointer;">
+                <div class="category-overlay">
+                    <h3>LANDSCAPE</h3>
+                    <div class="view-gallery-btn">View Gallery</div>
+                </div>
+                <img src="assets/images/works/LANDSCAPE/_DSC0041.jpg" alt="Landscape Photography" class="category-bg">
+            </div>
+
+            <!-- Category Card 4: EXHIBITION -->
+            <div class="glass-card category-card" onclick="location.href='others/works.html?filter=exhibition'"
+                style="cursor:pointer;">
+                <div class="category-overlay">
+                    <h3>EXHIBITION</h3>
+                    <div class="view-gallery-btn">View Gallery</div>
+                </div>
+                <!-- Using a fallback image if Exhibition folder is empty or specific image needed -->
+                <img src="assets/images/works/EXHIBITION/DSC00234 (3).jpg" alt="Exhibition" class="category-bg">
+            </div>
+        </div>
+    </section>
+
+    <!-- 5) Exhibition and Judgement -->
+    <section id="exhibition">
+        <div class="glass-card">
+            <h2>Exhibition & Judgement</h2>
+            <div class="exhibition-content">
+                <div class="exhibition-text">
+                    <h3>Exhibitions & Judging</h3>
+                    <p>Throughout this journey, two of my photos got exhibited at Catch The Light, season 3 organised by
+                        y CUET Photographic Society. I have also served as a judge for Campus Photography Contest 2025
+                        organized by CU Statistics 54.</p>
+                </div>
+                <div class="exhibition-img">
+                    <img src="assets/images/exhibition.jpg" alt="Exhibition Display"
+                        style="width:100%; border-radius:16px; border:1px solid var(--glass-border);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6) Contact -->
+    <section id="contact">
+        <div class="glass-card contact-container">
+            <h2>Get In Touch</h2>
+            <p>Ready to capture your moments? Let's talk.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    📧 <a href="mailto:email@example.com">ishaankphotography@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <!-- Dynamic Footer Container -->
+    <div id="dynamic-footer"></div>
+
+
+    <!-- GALLERY MODAL -->
+    <div id="gallery-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <h2 id="modal-category-title">Category Name</h2>
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Javascript will populate images here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Data -->
+    <script src="assets/js/gallery-data.js"></script>
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

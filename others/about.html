@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <!-- Navbar/Footer CSS is in main.css -->
+    <style>
+        .about-hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(208, 0, 0, 0.15) 0%, transparent 60%);
+        }
+
+        .about-grid {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 10% 5rem;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            transform: rotate(-3deg);
+            transition: 0.5s;
+        }
+
+        .about-img img:hover {
+            transform: rotate(0deg) scale(1.02);
+            border-color: var(--neon-red);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            text-align: left;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .journey-timeline {
+            padding: 5rem 10%;
+            position: relative;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-year {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--neon-red);
+            width: 120px;
+            flex-shrink: 0;
+            text-align: right;
+            padding-right: 2rem;
+            border-right: 2px solid var(--glass-border);
+        }
+
+        .timeline-content {
+            padding-left: 2rem;
+        }
+
+        .timeline-content h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 3rem !important;
+            }
+
+            .about-grid {
+                padding: 0 5% 3rem;
+                gap: 2rem;
+            }
+
+            .about-text h2 {
+                text-align: center;
+                margin-top: 1rem;
+            }
+
+            .journey-timeline {
+                padding: 3rem 5%;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                padding: 1.5rem !important;
+            }
+
+            .timeline-year {
+                width: 100%;
+                text-align: left;
+                border-right: none;
+                border-bottom: 2px solid var(--glass-border);
+                padding-bottom: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .timeline-content {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Dynamic Nav Container -->
+    <div id="dynamic-nav"></div>
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <div>
+            <h1 style="font-size: 4rem; text-shadow: 0 0 20px rgba(255,42,42,0.3);">MY <span
+                    class="highlight">STORY</span></h1>
+            <p>Behind the lens, chasing light and shadows.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="about-grid">
+        <div class="about-img">
+            <!-- Using story.jpg from assets -->
+            <img src="../assets/images/story.jpg" alt="Ishaan Neel">
+        </div>
+        <div class="about-text glass-card">
+            <h2>My Journey</h2>
+            <p>
+                I always wondered if I could show other people how I viewed the world. That made me start my journey
+                with my mom's Nokia 6300 and since then I've been a vagabond walking through the world creating my own
+                shutterstory.
+            </p>
+            <br>
+            <h3>Exhibition and Judging</h3>
+            <p>
+                Throughout this journey, two of my photos got exhibited at Catch The Light, season 3 organised by y CUET
+                Photographic Society. I have also served as a judge for Campus Photography Contest 2025 organized by CU
+                Statistics 54.
+            </p>
+            <br>
+            <p>
+                It's still a small feat but I'm learning everyday to reach new heights.
+            </p>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <section class="journey-timeline">
+        <h2 style="text-align: center; margin-bottom: 4rem;">Journey</h2>
+
+        <div class="timeline-item glass-card" style="padding: 2rem;">
+            <div class="timeline-year">2018</div>
+            <div class="timeline-content">
+                <h3>The Beginning</h3>
+                <p>Started with a simple point-and-shoot, exploring the streets.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item glass-card" style="padding: 2rem;">
+            <div class="timeline-year">2021</div>
+            <div class="timeline-content">
+                <h3>Going Pro</h3>
+                <p>Upgraded to professional gear and started covering local events.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item glass-card" style="padding: 2rem;">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-content">
+                <h3>Exhibitions</h3>
+                <p>Featured in the City Art Gallery and recognized throughout the community.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Footer Container -->
+    <div id="dynamic-footer"></div>
+
+    <!-- Main JS (loads Nav/Footer) -->
+    <script src="../assets/js/main.js"></script>
+</body>
+
+</html>
