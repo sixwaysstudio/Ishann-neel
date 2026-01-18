@@ -25,7 +25,7 @@ const getImages = (dir, category = '') => {
             results = results.concat(getImages(filePath, newCategory));
         } else {
             // Filter for image files
-            if (/\.(jpg|jpeg|png|gif|webp)$/i.test(file)) {
+            if (/\.(webp|jpg|jpeg|png|gif)$/i.test(file)) {
                 // Create the web-accessible path
                 // We need the relative path from the 'works' folder
                 // filePath included absolute path. 

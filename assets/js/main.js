@@ -142,8 +142,33 @@ const scrollReveal = () => {
     window.addEventListener('scroll', revealOnScroll);
 }
 
+// Preloader Logic
+const handlePreloader = () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Lock scroll
+        document.body.style.overflow = 'hidden';
+
+        window.addEventListener('load', () => {
+            // Minimum display time of 2s for premium feel
+            setTimeout(() => {
+                preloader.classList.add('loader-hidden');
+
+                preloader.addEventListener('transitionend', () => {
+                    if (preloader.parentNode) {
+                        preloader.parentNode.removeChild(preloader);
+                    }
+                    // Restore scroll
+                    document.body.style.overflow = 'auto';
+                });
+            }, 2000);
+        });
+    }
+}
+
 // Init
 const app = () => {
+    handlePreloader();
     loadComponents();
     scrollReveal();
     /* --- Portfolio Logic --- */
