@@ -286,49 +286,30 @@
 
     <script>
         // ========================================
-        // PROGRESSIVE IMAGE LOADING WITH LQIP
+        // SIMPLE GALLERY WITH NATIVE LAZY LOADING
         // ========================================
 
-        // Render Gallery with Progressive Loading
         const galleryContainer = document.getElementById('works-grid');
 
-        // Debug check
         if (typeof galleryData === 'undefined') {
-            console.error('Gallery data not loaded. Please run update-gallery.bat');
-            galleryContainer.innerHTML = '<p style="color:white;text-align:center;">Gallery data missing. Please run update-gallery.bat</p>';
+            console.error('Gallery data not loaded.');
+            galleryContainer.innerHTML = '<p style="color:white;text-align:center;">Gallery data missing.</p>';
         } else {
             galleryData.forEach(item => {
                 const div = document.createElement('div');
-                div.className = 'work-item progressive';
+                div.className = 'work-item';
                 div.setAttribute('data-category', item.category);
-                div.setAttribute('data-lazy', 'pending');
-                div.setAttribute('data-src', item.src);
 
                 // Handle "wild life" space in data-category for filtering
                 if (item.category === 'wild life') div.setAttribute('data-category', 'wildlife');
 
-                // Set aspect ratio if dimensions available
-                if (item.width && item.height) {
-                    const ratio = (item.height / item.width) * 100;
-                    div.style.paddingBottom = `${ratio}%`;
-                    div.style.height = '0';
-                    div.style.position = 'relative';
-                }
-
-                // Build HTML with placeholder thumbnail
-                const thumbSrc = item.thumb || '';
-                const placeholderHTML = thumbSrc
-                    ? `<img src="${thumbSrc}" alt="" class="placeholder" aria-hidden="true">`
-                    : '';
-
+                // Create image with native lazy loading - SIMPLE AND RELIABLE
                 div.innerHTML = `
-                    ${placeholderHTML}
+                    <div class="image-loader"></div>
                     <img 
-                        data-src="${item.src}" 
+                        src="${item.src}" 
                         alt="${item.title}" 
-                        class="full-image"
-                        ${item.width ? `width="${item.width}"` : ''}
-                        ${item.height ? `height="${item.height}"` : ''}
+                        loading="lazy"
                         decoding="async"
                     >
                     <div class="work-item-overlay">
@@ -338,49 +319,27 @@
                 `;
                 galleryContainer.appendChild(div);
             });
-        }
 
-        // ========================================
-        // INTERSECTION OBSERVER FOR LAZY LOADING
-        // ========================================
-        const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const item = entry.target;
-                    const fullImg = item.querySelector('.full-image');
+            // Add fade-in effect when images load
+            document.querySelectorAll('.work-item img').forEach(img => {
+                const loader = img.parentElement.querySelector('.image-loader');
 
-                    if (fullImg && fullImg.dataset.src) {
-                        item.setAttribute('data-lazy', 'loading');
+                const handleLoad = () => {
+                    img.classList.add('loaded');
+                    if (loader) loader.classList.add('hidden');
+                };
 
-                        // Load the full image
-                        fullImg.src = fullImg.dataset.src;
-                        fullImg.removeAttribute('data-src');
-
-                        fullImg.onload = () => {
-                            fullImg.classList.add('loaded');
-                            item.classList.add('complete');
-                            item.setAttribute('data-lazy', 'loaded');
-                        };
-
-                        fullImg.onerror = () => {
-                            item.classList.add('complete');
-                            item.setAttribute('data-lazy', 'error');
-                            fullImg.style.opacity = '0.3';
-                        };
-                    }
-
-                    observer.unobserve(item);
+                if (img.complete && img.naturalHeight !== 0) {
+                    handleLoad();
+                } else {
+                    img.addEventListener('load', handleLoad);
+                    img.addEventListener('error', () => {
+                        if (loader) loader.classList.add('hidden');
+                        img.style.opacity = '0.3';
+                    });
                 }
             });
-        }, {
-            rootMargin: '200px 0px', // Start loading 200px before entering viewport
-            threshold: 0.01
-        });
-
-        // Observe all work items
-        document.querySelectorAll('.work-item.progressive').forEach(item => {
-            lazyLoadObserver.observe(item);
-        });
+        }
 
         // ========================================
         // FILTER LOGIC
@@ -393,17 +352,10 @@
                 btn.classList.add('active');
 
                 const filterValue = btn.getAttribute('data-filter');
-                const updateItems = document.querySelectorAll('.work-item');
-
-                updateItems.forEach(item => {
+                document.querySelectorAll('.work-item').forEach(item => {
                     const category = item.getAttribute('data-category');
                     if (filterValue === 'all' || category === filterValue) {
                         item.classList.remove('hide');
-                        item.style.animation = 'fadeIn 0.5s ease forwards';
-                        // Re-observe for lazy loading when filter shows items
-                        if (item.getAttribute('data-lazy') === 'pending') {
-                            lazyLoadObserver.observe(item);
-                        }
                     } else {
                         item.classList.add('hide');
                     }
@@ -417,9 +369,7 @@
         if (filterParam) {
             setTimeout(() => {
                 const targetBtn = document.querySelector(`.filter-btn[data-filter="${filterParam}"]`);
-                if (targetBtn) {
-                    targetBtn.click();
-                }
+                if (targetBtn) targetBtn.click();
             }, 100);
         }
 
@@ -433,12 +383,9 @@
         galleryContainer.addEventListener('click', (e) => {
             const workItem = e.target.closest('.work-item');
             if (workItem) {
-                // Get the full src (either from data attribute or loaded img)
-                const fullImg = workItem.querySelector('.full-image');
-                const src = fullImg.src || workItem.getAttribute('data-src');
-
-                if (src) {
-                    lightboxImg.src = src;
+                const img = workItem.querySelector('img');
+                if (img && img.src) {
+                    lightboxImg.src = img.src;
                     lightbox.style.display = 'flex';
                     document.body.style.overflow = 'hidden';
                 }
@@ -456,7 +403,6 @@
                 document.body.style.overflow = 'auto';
             }
         });
-
     </script>
     <script src="../assets/js/main.js"></script>
 </body>
