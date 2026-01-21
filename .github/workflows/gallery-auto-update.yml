@@ -1,34 +1,50 @@
-name: Update Gallery Data
+name: Auto-Optimize Images
 
 on:
   push:
     paths:
-      - 'assets/images/works/**' # Trigger only when images change
+      - 'assets/images/**' # Trigger when any images change
     branches:
       - main
       - master
+  workflow_dispatch: # Allow manual trigger
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  optimize:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
 
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
 
-    - name: Run Gallery Generator
+    - name: Install Python dependencies
+      run: pip install Pillow
+
+    - name: Generate Thumbnails
+      run: python tools/generate_thumbnails.py
+
+    - name: Update Gallery Data
       run: node tools/generate-gallery.js
 
     - name: Commit and Push changes
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
-        commit_message: "Auto-update gallery data [skip ci]"
-        file_pattern: 'assets/js/gallery-data.js'
+        commit_message: "🖼️ Auto-optimize images [skip ci]"
+        file_pattern: |
+          assets/images/**/thumbs/*
+          assets/js/gallery-data.js
+          assets/js/image-dimensions.json
+

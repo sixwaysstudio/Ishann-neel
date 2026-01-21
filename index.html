@@ -5,9 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photography Portfolio</title>
+
+    <!-- Critical Resource Preloading -->
+    <link rel="preload" as="image" href="assets/images/home/sub.webp" fetchpriority="high">
+    <link rel="preload" as="style" href="assets/css/main.css">
+
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Preconnect for faster font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fonts with display swap for faster text rendering -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
@@ -38,7 +53,7 @@
 
             <!-- Subject Image (Bottom - Front) -->
             <div class="hero-subject">
-                <img src="assets/images/home/sub.webp" alt="Photographer">
+                <img src="assets/images/home/sub.webp" alt="Photographer" fetchpriority="high" decoding="async">
             </div>
 
             <!-- Buttons (Top - Front) -->
@@ -55,7 +70,8 @@
             <h2>My Story</h2>
             <div class="story-container">
                 <div class="story-image">
-                    <img src="assets/images/story.webp" alt="My Story">
+                    <img src="assets/images/story.webp" alt="My Story" loading="lazy" decoding="async" width="800"
+                        height="600">
                 </div>
                 <div class="story-text">
                     <p>
@@ -101,7 +117,8 @@
                     <h3>STREET</h3>
                     <div class="view-gallery-btn">View Gallery</div>
                 </div>
-                <img src="assets/images/works/STREET/DSC00407.webp" alt="Street Photography" class="category-bg">
+                <img src="assets/images/works/STREET/DSC00407.webp" alt="Street Photography" class="category-bg"
+                    loading="lazy" decoding="async">
             </div>
 
             <!-- Category Card 2: WILD LIFE -->
@@ -111,8 +128,8 @@
                     <h3>WILD LIFE</h3>
                     <div class="view-gallery-btn">View Gallery</div>
                 </div>
-                <img src="assets/images/works/WILD LIFE/_DSC0190_1.webp" alt="Wild Life Photography"
-                    class="category-bg">
+                <img src="assets/images/works/WILD LIFE/_DSC0190_1.webp" alt="Wild Life Photography" class="category-bg"
+                    loading="lazy" decoding="async">
             </div>
 
             <!-- Category Card 3: LANDSCAPE -->
@@ -122,7 +139,8 @@
                     <h3>LANDSCAPE</h3>
                     <div class="view-gallery-btn">View Gallery</div>
                 </div>
-                <img src="assets/images/works/LANDSCAPE/_DSC0041.webp" alt="Landscape Photography" class="category-bg">
+                <img src="assets/images/works/LANDSCAPE/_DSC0041.webp" alt="Landscape Photography" class="category-bg"
+                    loading="lazy" decoding="async">
             </div>
 
             <!-- Category Card 4: EXHIBITION -->
@@ -133,7 +151,8 @@
                     <div class="view-gallery-btn">View Gallery</div>
                 </div>
                 <!-- Using a fallback image if Exhibition folder is empty or specific image needed -->
-                <img src="assets/images/works/EXHIBITION/DSC00234 (3).webp" alt="Exhibition" class="category-bg">
+                <img src="assets/images/works/EXHIBITION/DSC00234 (3).webp" alt="Exhibition" class="category-bg"
+                    loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -150,7 +169,7 @@
                         organized by CU Statistics 54.</p>
                 </div>
                 <div class="exhibition-img">
-                    <img src="assets/images/exhibition.webp" alt="Exhibition Display"
+                    <img src="assets/images/exhibition.webp" alt="Exhibition Display" loading="lazy" decoding="async"
                         style="width:100%; border-radius:16px; border:1px solid var(--glass-border);">
                 </div>
             </div>
